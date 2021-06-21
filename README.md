@@ -9,19 +9,19 @@
 
 ## Motivation
 
-This repository holds a project called [`Move It`](https://move-it-xp.vercel.app). In this project, I created a platform in which users can segment their workflow and be provided with health based challenges.
+This repository holds a project called [`LetMeAsk`](https://letmeask-it.vercel.app/). In this project, I created a platform in which users can post their questions, for other users to answer or interact with user posts.
 
-You can run it by cloning the repository. Running `cd move-it`,`npm install` then executing the command `npm run dev`.
+You can run it by cloning the repository. Running `cd letmeask`,`yarn install` then executing the command `npm run start`.
 
 ## Requirements
 
-Typescript, Tailwind Css, Next.js and more.
+Typescript, Firebase, Tailwind Css, and more.
 
 ## Pages
 ### *Home*
 
-#### timer and user details
-Click start cycle to begin your work cycle and at the end of it receive your challenge and XP on completion.
+#### edit eroigjwerg
+<!-- Click start cycle to begin your work cycle and at the end of it receive your challenge and XP on completion. -->
 ##### /
 ###### App
 
