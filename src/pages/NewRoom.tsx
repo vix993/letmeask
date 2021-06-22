@@ -1,9 +1,8 @@
 import illustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
-import googleIconImg from "../assets/images/google-icon.svg";
 import { Button } from "../components/Button";
 
-export const Home = () => {
+export const NewRoom = () => {
   return (
     <div className="flex items-center h-screen ">
       <aside
@@ -22,23 +21,7 @@ export const Home = () => {
       <main className="flex-8 px-8 flex flex-col items-center justify-center">
         <div className="flex flex-col w-full max-w-xs items-center text-center">
           <img className="self-center" src={logoImg} alt="LetMeAsk" />
-          <button
-            className="w-full hover:bg-red-400 transition mt-24 h-12 rounded-lg font-medium bg-red-500 text-white flex flex-row justify-center items-center p-1"
-          >
-            <img className="mr-2" src={googleIconImg} alt="Google logo" />
-            Create your room with Google
-          </button>
-          <section
-            className="flex flex-row justify-center w-full my-8 items-center"
-          >
-            <span className="w-3/12 h-1 bg-gray-300 rounded-3xl" />
-            <div
-              className="text-md text-gray-400 flex mx-4"
-            >
-              or join a room
-            </div>
-            <span className="w-3/12 h-1 bg-gray-300 rounded-3xl" />
-          </section>
+          <h2 className="text-2xl my-16 mb-6 font-pop">Create new room</h2>
           <form className="w-full">
             <input
               className="h-12 rounded-lg px-4 bg-white border border-gray-200 w-full focus:border-purple-300"
@@ -46,9 +29,13 @@ export const Home = () => {
               placeholder="Type the room code"
             />
             <Button type="submit">
-              Enter room
+              Create room
             </Button>
           </form>
+          <p className="text-md text-sm text-gray-400 mt-8">
+            Want to join an existing room?
+            <a className="text-pink-400" href="/">click here</a>
+          </p>
         </div>
       </main>
     </div>
