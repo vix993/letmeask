@@ -14,13 +14,13 @@ type AuthContextType = {
 };
 
 type AuthContextProviderProps = {
-	children: ReactNode;
-}
+  children: ReactNode;
+};
 
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthContextProvider = (props: AuthContextProviderProps) => {
-	const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -41,7 +41,7 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
 
     return () => {
       unsubscribe();
-    }
+    };
   }, []);
 
   const signInWithGoogle = async () => {
@@ -67,7 +67,7 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
     <AuthContext.Provider
       value={{ user, signInWithGoogle } as AuthContextType}
     >
-	    {props.children}
+      {props.children}
     </AuthContext.Provider>
   );
 };
