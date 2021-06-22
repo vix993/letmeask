@@ -9,7 +9,7 @@
 
 ## Motivation
 
-This repository holds a project called [`LetMeAsk`](https://letmeask-it.vercel.app/). In this project, I created a platform in which users can post their questions, for other users to answer or interact with user posts.
+This repository holds a project called [`LetMeAsk`](https://letmeask-it.vercel.app/). In this project, I created a platform in which users can post their questions, for other users to answer or interact with user Q&A's.
 
 You can run it by cloning the repository. Running `cd letmeask`,`yarn install` then executing the command `npm run start`.
 
@@ -20,13 +20,13 @@ Typescript, Firebase, Tailwind Css, and more.
 ## Pages
 ### *Home*
 
-#### edit eroigjwerg
-<!-- Click start cycle to begin your work cycle and at the end of it receive your challenge and XP on completion. -->
+#### Landing page
+Log in with Google and create a room or join an existing room.
 ##### /
-###### App
+###### Log In
 
 <!-- <img src="./presentation/screenshot.png" alt="screenshot of UI"/> -->
 
-###### Level-up
+###### Join Room
 
 <!-- <img src="./presentation/screenshot_levelup.png" alt="screenshot of levelup"/> -->
