@@ -5,8 +5,11 @@ import illustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
 
 import { Button } from "../components/Button";
+import { AuthContext } from '../contexts/AuthContext';
 
 export const NewRoom = () => {
+  // const { user } = useContext(AuthContext);
+
   return (
     <div className="flex items-center h-screen ">
       <aside
@@ -37,8 +40,8 @@ export const NewRoom = () => {
             </Button>
           </form>
           <p className="text-md text-sm text-gray-400 mt-8">
-            Want to join an existing room?
-            <Link className="text-pink-400" to="/">click here</Link>
+            Want to join an existing room? 
+            <Link className="text-pink-400 hover:underline" to="/">click here</Link>
           </p>
         </div>
       </main>
