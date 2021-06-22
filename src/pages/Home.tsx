@@ -22,7 +22,7 @@ export const Home = () => {
   return (
     <div className="flex items-center h-screen ">
       <aside
-        className="flex-7 h-full bg-purple-500 text-white flex flex-col justify-center px-5 py-8"
+        className="flex-7 h-full bg-purple-500 text-white flex flex-col items-center justify-center px-5 py-8"
       >
         <img
           className="max-w-xs"
