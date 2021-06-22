@@ -1,9 +1,27 @@
+import { useContext } from 'react';
+import { useHistory } from "react-router-dom";
+
+import { firebase, auth } from '../services/firebase';
+
 import illustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
 import googleIconImg from "../assets/images/google-icon.svg";
+
 import { Button } from "../components/Button";
 
 export const Home = () => {
+  const history = useHistory();
+
+  const handleCreateRoom = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    auth.signInWithPopup(provider).then(result => {
+      console.log(result)
+    })
+
+    history.push("/rooms/new");
+  };
+
   return (
     <div className="flex items-center h-screen ">
       <aside
@@ -23,6 +41,7 @@ export const Home = () => {
         <div className="flex flex-col w-full max-w-xs items-center text-center">
           <img className="self-center" src={logoImg} alt="LetMeAsk" />
           <button
+            onClick={handleCreateRoom}
             className="w-full hover:bg-red-400 transition mt-24 h-12 rounded-lg font-medium bg-red-500 text-white flex flex-row justify-center items-center p-1"
           >
             <img className="mr-2" src={googleIconImg} alt="Google logo" />

@@ -1,5 +1,9 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import illustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
+
 import { Button } from "../components/Button";
 
 export const NewRoom = () => {
@@ -34,7 +38,7 @@ export const NewRoom = () => {
           </form>
           <p className="text-md text-sm text-gray-400 mt-8">
             Want to join an existing room?
-            <a className="text-pink-400" href="/">click here</a>
+            <Link className="text-pink-400" to="/">click here</Link>
           </p>
         </div>
       </main>
