@@ -45,6 +45,7 @@ export const Room = () => {
   useEffect(() => {
     const roomRef = database.ref(`rooms/${id}`);
 
+    // maybe better child_added child_changed child_removed
     roomRef.on("value", (room) => {
       const databaseRoom = room.val();
       const firebaseQuestions: FireBaseQuestions = databaseRoom.questions ?? {};
@@ -60,7 +61,7 @@ export const Room = () => {
           };
         },
       );
-      console.log(parsedQuestions);
+
       setTitle(databaseRoom.title);
       setQuestions(parsedQuestions);
     });

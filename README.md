@@ -23,7 +23,7 @@ Typescript, Firebase, Tailwind Css, and more.
 
 ##### /
 
-###### Log In
+###### Log In or Join Room
 
 Log in with google to create a room. Or join an existing Q&A using the room ID.
 
@@ -33,7 +33,9 @@ Log in with google to create a room. Or join an existing Q&A using the room ID.
 
 ##### /rooms/new
 
-###### Join Room
+###### Create Room
+
+Create a room for your Q&A.
 
 <img src="./presentation/screenshotNewRoom.png" alt="screenshot of new room page"/>
 
