@@ -2,11 +2,16 @@
 
 ## Content
 
-1. [Motivation](#Motivation) 
-2. [Requirements](#Requirements)
-3. [Pages](#Pages)
+1. [Status](#Status)
+2. [Motivation](#Motivation) 
+3. [Requirements](#Requirements)
+4. [Pages](#Pages)
     - [Home](#Home)
     - [NewRoom](#NewRoom)
+
+## Status
+
+![example workflow](https://github.com/vix993/letmeask/actions/workflows/test_on_push.yml/badge.svg)
 
 ## Motivation
 
