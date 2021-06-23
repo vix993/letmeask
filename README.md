@@ -5,7 +5,8 @@
 1. [Motivation](#Motivation) 
 2. [Requirements](#Requirements)
 3. [Pages](#Pages)
-    - [Home](#Visit)
+    - [Home](#Home)
+    - [NewRoom](#NewRoom)
 
 ## Motivation
 
@@ -20,13 +21,22 @@ Typescript, Firebase, Tailwind Css, and more.
 ## Pages
 ### *Home*
 
-#### Landing page
-Log in with Google and create a room or join an existing room.
 ##### /
+
 ###### Log In
 
-<!-- <img src="./presentation/screenshot.png" alt="screenshot of UI"/> -->
+Log in with google to create a room. Or join an existing Q&A using the room ID.
+
+<img src="./presentation/screenshotLanding.png" alt="screenshot of landing page UI"/>
+
+### *NewRoom*
+
+##### /rooms/new
 
 ###### Join Room
 
-<!-- <img src="./presentation/screenshot_levelup.png" alt="screenshot of levelup"/> -->
+<img src="./presentation/screenshotNewRoom.png" alt="screenshot of new room page"/>
+
+
+
+

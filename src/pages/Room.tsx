@@ -14,11 +14,22 @@ type FireBaseQuestions = Record<string, {
   author: {
     name: string;
     avatar: string;
-  }
+  };
   content: string;
   isAnswered: boolean;
   isHighlighted: boolean;
-}>
+}>;
+
+type Question = {
+  id: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  content: string;
+  isAnswered: boolean;
+  isHighlighted: boolean;
+};
 
 type RoomParams = {
   id: string;
@@ -27,26 +38,32 @@ type RoomParams = {
 export const Room = () => {
   const { user } = useAuth();
   const { id } = useParams<RoomParams>();
-  const [newQuestion, setNewQuestion] = useState('');
+  const [newQuestion, setNewQuestion] = useState("");
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${id}`);
 
-    roomRef.once('value', room => {
+    roomRef.on("value", (room) => {
       const databaseRoom = room.val();
       const firebaseQuestions: FireBaseQuestions = databaseRoom.questions ?? {};
 
-      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
-        return {
-          id: key,
-          content: value.content,
-          author: value.author,
-          isHighlighted: value.isHighlighted,
-          isAnswered: value.isAnswered
-        }
-      });
+      const parsedQuestions = Object.entries(firebaseQuestions).map(
+        ([key, value]) => {
+          return {
+            id: key,
+            content: value.content,
+            author: value.author,
+            isHighlighted: value.isHighlighted,
+            isAnswered: value.isAnswered,
+          };
+        },
+      );
       console.log(parsedQuestions);
-    })
+      setTitle(databaseRoom.title);
+      setQuestions(parsedQuestions);
+    });
   }, [id]);
 
   const handleSendQuestion = async (event: FormEvent) => {
@@ -91,13 +108,15 @@ export const Room = () => {
       <main className="max-w-4xl my-0 mx-auto">
         <div className="m-8 flex items-center">
           <h1 className="font-pop text-2xl text-gray-800">
-            Room of some stuff
+            {title} Q&amp;A
           </h1>
-          <span
-            className="ml-4 bg-pink-500 rounded-full py-2 px-4 text-white font-medium text-sm"
-          >
-            4 questions
-          </span>
+          {questions.length > 0 && (
+            <span
+              className="ml-4 bg-pink-500 rounded-full py-2 px-4 text-white font-medium text-sm"
+            >
+              {questions.length} questions
+            </span>
+          )}
         </div>
 
         <form onSubmit={handleSendQuestion}>
