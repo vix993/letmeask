@@ -1,5 +1,3 @@
 export const Question = () => {
-	return (
-		<h1>questio</h1>
-	)
-}
+  return <h1>questio</h1>;
+};

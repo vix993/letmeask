@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 @layer base {
-	body {
-		@apply text-gray-800;
-		@apply bg-gray-200;
-	}
+  body {
+    @apply text-gray-800;
+    @apply bg-gray-200;
+  }
 
-	body, input, button, textarea {
-		@apply font-normal font-rob text-base;
-	}
+  body,
+  input,
+  button,
+  textarea {
+    @apply font-normal font-rob text-base;
+  }
 }
