@@ -1,17 +1,53 @@
-import { useParams } from 'react-router-dom'
+import { FormEvent, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import toast, { Toaster } from "react-hot-toast";
 
 import logoImg from "../assets/images/logo.svg";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
+import { useAuth } from "../hooks/useAuth";
+import { database } from "../services/firebase";
 type RoomParams = {
   id: string;
-}
-
+};
 
 export const Room = () => {
+  const { user } = useAuth();
   const { id } = useParams<RoomParams>();
+  const [newQuestion, setNewQuestion] = useState("");
+
+  const handleSendQuestion = async (event: FormEvent) => {
+    event.preventDefault();
+
+    if (newQuestion.trim() === "") {
+      return;
+    }
+
+    if (!user) {
+      toast.error("Please login to send a question!");
+    }
+
+    const question = {
+      content: newQuestion,
+      author: {
+        name: user?.name,
+        avatar: user?.avatar,
+      },
+      isHighlighted: false,
+      isAnswered: false,
+    };
+
+    await database.ref(`rooms/${id}/questions`).push(question);
+
+    setNewQuestion("");
+  };
+
   return (
     <div className="">
+      <div>
+        <Toaster position="top-center" reverseOrder={false}></Toaster>
+      </div>
       <header className="p-6 border-b border-white">
         <div
           className="flex max-w-5xl my-0 mx-auto justify-between items-center"
@@ -32,18 +68,42 @@ export const Room = () => {
           </span>
         </div>
 
-        <form>
+        <form onSubmit={handleSendQuestion}>
           <textarea
             className="w-full p-4 rounded-lg bg-gray-100 shadow-md resize-y min-h-md focus:border-purple-400"
             placeholder="What would you like to ask"
+            onChange={(event) => setNewQuestion(event.target.value)}
+            value={newQuestion}
           />
           <div className="flex justify-between items-center mt-4">
-            <span className="text-sm text-gray-400 font-medium">
-              to send a question, <button className="bg-transparent border-0 text-purple-500 underline text-sm">login to your account</button>
-            </span>
-            <div className="w-64">
+            {!user
+              ? (
+                <span className="text-sm text-gray-400 font-medium">
+                  to send a question,{" "}
+                  <button
+                    className="bg-transparent border-0 text-purple-500 underline text-sm"
+                  >
+                    login to your account
+                  </button>
+                </span>
+              )
+              : (
+                <div className="flex items-center">
+                  <img
+                    className="w-8 h-8 rounded-3xl"
+                    src={user.avatar}
+                    alt={user.name}
+                  />
+                  <span className="ml-2 text-gray-700 font-medium text-sm">
+                    {user.name}
+                  </span>
+                </div>
+              )}
 
-            <Button type="submit">Submit your question</Button>
+            <div className="w-64 ml-auto">
+              <Button type="submit" disabled={!user}>
+                Submit your question
+              </Button>
             </div>
           </div>
         </form>
