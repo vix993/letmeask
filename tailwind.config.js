@@ -10,6 +10,9 @@ module.exports = {
     flex: {
       '7': '7',
       '8': '8'
+    },
+    minHeight: {
+      'md': '130px'
     }
   },
   variants: {

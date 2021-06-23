@@ -6,18 +6,38 @@ import googleIconImg from "../assets/images/google-icon.svg";
 
 import { Button } from "../components/Button";
 import { useAuth } from '../hooks/useAuth';
+import { FormEvent, useState } from "react";
+import { database } from "../services/firebase";
 
 export const Home = () => {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
-
+  const [roomCode, setRoomCode] = useState('');
+  
   const handleCreateRoom = async () => {
     if (!user) {
       await signInWithGoogle();
     }
 
     history.push("/rooms/new");
-  };
+  }
+
+  const handleJoinRoom = async (event: FormEvent) => {
+    event.preventDefault();
+
+    if (roomCode.trim() === '') {
+      return
+    }
+
+    const roomRef = await database.ref(`rooms/${roomCode}`).get();
+
+    if (!roomRef.exists()) {
+      alert('Room does not exist.');
+      return
+    }
+
+    history.push(`rooms/${roomCode}`);
+  }
 
   return (
     <div className="flex items-center h-screen ">
@@ -55,15 +75,21 @@ export const Home = () => {
             </div>
             <span className="w-3/12 h-1 bg-gray-300 rounded-3xl" />
           </section>
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleJoinRoom}>
             <input
               className="h-12 rounded-lg px-4 bg-white border border-gray-200 w-full focus:border-purple-300"
               type="text"
               placeholder="Type the room code"
+              onChange={event => setRoomCode(event.target.value)}
+              value={roomCode}
             />
+
+            <div className="mt-12">
+
             <Button type="submit">
               Enter room
             </Button>
+            </div>
           </form>
         </div>
       </main>
