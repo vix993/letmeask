@@ -109,7 +109,7 @@ export const Room = () => {
       <main className="max-w-4xl my-0 mx-auto">
         <div className="m-8 flex items-center">
           <h1 className="font-pop text-2xl text-gray-800">
-            {title} Q&amp;A
+            Topic: {title}
           </h1>
           {questions.length > 0 && (
             <span
