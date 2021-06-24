@@ -1,5 +1,5 @@
-import { FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { FormEvent, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { useAuth } from '../hooks/useAuth';
@@ -18,10 +18,18 @@ type RoomParams = {
 };
 
 export const Room = () => {
+  const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
   const { id } = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
-  const { questions, title } = useRoom(id);
+  const { questions, title, endedAt } = useRoom(id);
+
+  useEffect(() => {
+    if (endedAt) {
+      toast.error('Room already closed.')
+      history.push('/');
+    }
+  }, [endedAt, history])
 
   const handleSendQuestion = async (event: FormEvent) => {
     event.preventDefault();
