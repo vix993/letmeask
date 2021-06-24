@@ -1,14 +1,17 @@
+import { ReactNode } from 'react';
+
 type QuestionProps = {
   content: string;
   author: {
     name: string;
     avatar: string;
   };
+  children?: ReactNode;
 };
 
-export const Question = ({ content, author }: QuestionProps) => {
+export const Question = ({ content, author, children }: QuestionProps) => {
   return (
-    <section className='bg-gray-50 rounded-lg shadow-md p-6 mt-2'>
+    <section className='bg-gray-50 rounded-lg shadow-md p-6 my-3'>
       <p className='text-gray-600'>{content}</p>
       <footer className='flex justify-between items-center mt-6'>
         <div className='flex items-center'>
@@ -19,7 +22,7 @@ export const Question = ({ content, author }: QuestionProps) => {
           />
           <span className='ml-2 text-gray-600 text-sm'>{author.name}</span>
         </div>
-        <div className=''></div>
+        <div className=''>{children}</div>
       </footer>
     </section>
   );

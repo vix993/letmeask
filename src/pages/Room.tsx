@@ -11,6 +11,7 @@ import { RoomCode } from '../components/RoomCode';
 
 import logoImg from '../assets/images/logo.svg';
 import { useRoom } from '../hooks/useRoom';
+import { LikeIcon } from '../assets/svgTsx/LikeIcon';
 
 type RoomParams = {
   id: string;
@@ -46,6 +47,21 @@ export const Room = () => {
     await database.ref(`rooms/${id}/questions`).push(question);
 
     setNewQuestion('');
+  };
+
+  const handleLikeQuestion = async (
+    questionId: string,
+    likeId: string | undefined
+  ) => {
+    if (likeId) {
+      await database
+        .ref(`rooms/${id}/questions/${questionId}/likes/${likeId}`)
+        .remove();
+    } else {
+      await database.ref(`rooms/${id}/questions/${questionId}/likes`).push({
+        authorId: user?.id,
+      });
+    }
   };
 
   return (
@@ -106,12 +122,25 @@ export const Room = () => {
         </form>
         <div className='mt-8'>
           {questions.map((question) => {
+            const liked = question.likeId ? 'text-purple-600' : 'text-gray-500';
             return (
               <Question
                 key={question.id}
                 content={question.content}
                 author={question.author}
-              />
+              >
+                <button
+                  className='border-0 bg-transparent flex items-end gap-2 text-gray-400 transition hover:opacity-75'
+                  type='button'
+                  aria-label='show that I like it'
+                  onClick={() =>
+                    handleLikeQuestion(question.id, question.likeId)
+                  }
+                >
+                  {question.likeCount > 0 && <span>{question.likeCount}</span>}
+                  <LikeIcon styling={`${liked} stroke-current`} />
+                </button>
+              </Question>
             );
           })}
         </div>

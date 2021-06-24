@@ -1,51 +1,42 @@
-import { FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+// import { FormEvent, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
-import { useAuth } from '../hooks/useAuth';
-import { database } from '../services/firebase';
+// import { useAuth } from '../hooks/useAuth';
+// import { database } from '../services/firebase';
 
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
 
-import logoImg from '../assets/images/logo.svg';
 import { useRoom } from '../hooks/useRoom';
+
+import logoImg from '../assets/images/logo.svg';
+import deleteImg from '../assets/images/delete.svg';
+import { database } from '../services/firebase';
 
 type AdminRoomParams = {
   id: string;
 };
 
 export const AdminRoom = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const history = useHistory();
   const { id } = useParams<AdminRoomParams>();
-  const [newQuestion, setNewQuestion] = useState('');
   const { questions, title } = useRoom(id);
 
-  const handleSendQuestion = async (event: FormEvent) => {
-    event.preventDefault();
+  const handleKillRoom = async () => {
+    await database.ref(`rooms/${id}`).update({
+      endedAt: new Date(),
+    });
 
-    if (newQuestion.trim() === '') {
-      return;
+    history.push('/');
+  };
+
+  const handleDeleteQuestion = async (questionId: string) => {
+    if (window.confirm('Are you sure you want to delete this question?')) {
+      await database.ref(`rooms/${id}/questions/${questionId}`).remove();
     }
-
-    if (!user) {
-      toast.error('Please login to send a question!');
-    }
-
-    const question = {
-      content: newQuestion,
-      author: {
-        name: user?.name,
-        avatar: user?.avatar,
-      },
-      isHighlighted: false,
-      isAnswered: false,
-    };
-
-    await database.ref(`rooms/${id}/questions`).push(question);
-
-    setNewQuestion('');
   };
 
   return (
@@ -58,7 +49,11 @@ export const AdminRoom = () => {
           <img src={logoImg} alt='LetMeAsk' className='max-h-11' />
           <div className='flex gap-2'>
             <RoomCode code={id} />
-            <Button isAdminRoom={true} isOutlined={true}>
+            <Button
+              isAdminRoom={true}
+              isOutlined={true}
+              onClick={() => handleKillRoom()}
+            >
               Close Room
             </Button>
           </div>
@@ -81,7 +76,14 @@ export const AdminRoom = () => {
                 key={question.id}
                 content={question.content}
                 author={question.author}
-              />
+              >
+                <button
+                  type='button'
+                  onClick={() => handleDeleteQuestion(question.id)}
+                >
+                  <img src={deleteImg} alt='remove button' />
+                </button>
+              </Question>
             );
           })}
         </div>
