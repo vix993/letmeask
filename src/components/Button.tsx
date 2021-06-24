@@ -1,11 +1,23 @@
 import { ButtonHTMLAttributes } from 'react';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  isOutlined?: boolean;
+  isAdminRoom?: boolean;
+};
 
-export const Button = (props: ButtonProps) => {
+export const Button = ({
+  isOutlined = false,
+  isAdminRoom = false,
+  ...props
+}: ButtonProps) => {
+  const width = isAdminRoom ? 'w-1/3' : 'w-full';
+  const height = isAdminRoom ? 'h-10' : 'h-12';
+  const outlined = isOutlined
+    ? 'bg-white border border-purple-500 text-purple-500 hover:bg-purple-100'
+    : 'bg-purple-500 text-white hover:bg-purple-400';
   return (
     <button
-      className='disabled:opacity-60 disabled:cursor-not-allowed w-full hover:bg-purple-400 transition h-12 rounded-lg font-medium bg-purple-500 text-white flex flex-row justify-center items-center p-1'
+      className={`${height} ${width} disabled:opacity-60 disabled:cursor-not-allowed transition rounded-lg font-medium flex flex-row justify-center items-center p-1 ${outlined}`}
       {...props}
     />
   );

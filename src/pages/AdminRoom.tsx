@@ -12,13 +12,13 @@ import { RoomCode } from '../components/RoomCode';
 import logoImg from '../assets/images/logo.svg';
 import { useRoom } from '../hooks/useRoom';
 
-type RoomParams = {
+type AdminRoomParams = {
   id: string;
 };
 
-export const Room = () => {
+export const AdminRoom = () => {
   const { user } = useAuth();
-  const { id } = useParams<RoomParams>();
+  const { id } = useParams<AdminRoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
   const { questions, title } = useRoom(id);
 
@@ -56,7 +56,12 @@ export const Room = () => {
       <header className='p-6 border-b border-white'>
         <div className='flex max-w-5xl my-0 mx-auto justify-between items-center'>
           <img src={logoImg} alt='LetMeAsk' className='max-h-11' />
-          <RoomCode code={id} />
+          <div className='flex gap-2'>
+            <RoomCode code={id} />
+            <Button isAdminRoom={true} isOutlined={true}>
+              Close Room
+            </Button>
+          </div>
         </div>
       </header>
       <main className='max-w-4xl my-0 mx-auto'>
@@ -69,41 +74,6 @@ export const Room = () => {
           )}
         </div>
 
-        <form onSubmit={handleSendQuestion}>
-          <textarea
-            className='w-full p-4 rounded-lg bg-gray-100 shadow-md resize-y min-h-md focus:border-purple-400'
-            placeholder='What would you like to ask'
-            onChange={(event) => setNewQuestion(event.target.value)}
-            value={newQuestion}
-          />
-          <div className='flex justify-between items-center mt-4'>
-            {!user ? (
-              <span className='text-sm text-gray-400 font-medium'>
-                to send a question,{' '}
-                <button className='bg-transparent border-0 text-purple-500 underline text-sm'>
-                  login to your account
-                </button>
-              </span>
-            ) : (
-              <div className='flex items-center'>
-                <img
-                  className='w-8 h-8 rounded-3xl'
-                  src={user.avatar}
-                  alt={user.name}
-                />
-                <span className='ml-2 text-gray-700 font-medium text-sm'>
-                  {user.name}
-                </span>
-              </div>
-            )}
-
-            <div className='w-64 ml-auto'>
-              <Button type='submit' disabled={!user}>
-                Submit your question
-              </Button>
-            </div>
-          </div>
-        </form>
         <div className='mt-8'>
           {questions.map((question) => {
             return (
