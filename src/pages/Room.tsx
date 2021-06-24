@@ -18,7 +18,7 @@ type RoomParams = {
 };
 
 export const Room = () => {
-  const { user } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
   const { id } = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
   const { questions, title } = useRoom(id);
@@ -32,6 +32,7 @@ export const Room = () => {
 
     if (!user) {
       toast.error('Please login to send a question!');
+      return;
     }
 
     const question = {
@@ -96,7 +97,10 @@ export const Room = () => {
             {!user ? (
               <span className='text-sm text-gray-400 font-medium'>
                 to send a question,{' '}
-                <button className='bg-transparent border-0 text-purple-500 underline text-sm'>
+                <button
+                  onClick={() => signInWithGoogle()}
+                  className='bg-transparent border-0 text-purple-500 underline text-sm'
+                >
                   login to your account
                 </button>
               </span>

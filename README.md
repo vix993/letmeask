@@ -8,6 +8,8 @@
 4. [Pages](#Pages)
     - [Home](#Home)
     - [NewRoom](#NewRoom)
+    - [AdminRoom](#NewRoom)
+    - [PublicRoom](#PublicRoom)
 
 ## Status
 
@@ -44,6 +46,22 @@ Create a room for your Q&A.
 
 <img src="./presentation/screenshotNewRoom.png" alt="screenshot of new room page"/>
 
+### *AdminRoom*
 
+##### admin/rooms/:id
 
+###### Manage your Room
 
+Delete questions or close the room.
+
+<img src="./presentation/adminRoom.png" alt="screenshot of admin room"/>
+
+### *PublicRoom*
+
+##### rooms/:id
+
+###### Submit questions
+
+Submit questions and engage with other user questions
+
+<img src="./presentation/publicRoom.png" alt="screenshot of public room"/>
