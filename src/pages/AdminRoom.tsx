@@ -28,7 +28,7 @@ export const AdminRoom = () => {
 
   useEffect(() => {
     if (endedAt) {
-      toast.error('Room already closed.')
+      toast.error('Room already closed.');
       history.push('/');
     }
   }, [endedAt, history]);

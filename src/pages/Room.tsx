@@ -26,10 +26,10 @@ export const Room = () => {
 
   useEffect(() => {
     if (endedAt) {
-      toast.error('Room already closed.')
+      toast.error('Room already closed.');
       history.push('/');
     }
-  }, [endedAt, history])
+  }, [endedAt, history]);
 
   const handleSendQuestion = async (event: FormEvent) => {
     event.preventDefault();
