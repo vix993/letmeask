@@ -140,8 +140,11 @@ export const Room = () => {
                 key={question.id}
                 content={question.content}
                 author={question.author}
+                isAnswered={question.isAnswered}
+                isHighlighted={question.isHighlighted}
               >
-                <button
+                {!question.isAnswered && (
+                  <button
                   className='border-0 bg-transparent flex items-end gap-2 text-gray-400 transition hover:opacity-75'
                   type='button'
                   aria-label='show that I like it'
@@ -152,6 +155,8 @@ export const Room = () => {
                   {question.likeCount > 0 && <span>{question.likeCount}</span>}
                   <LikeIcon styling={`${liked} stroke-current`} />
                 </button>
+                )}
+                
               </Question>
             );
           })}
