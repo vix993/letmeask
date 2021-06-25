@@ -23,7 +23,14 @@ export const Question = ({
   // const answered = isAnswered ? '' : '';
   return (
     <section
-    className={cx('bg-gray-50 rounded-lg shadow-md p-6 my-3', {'bg-purple-100 border border-purple-500': isHighlighted && !isAnswered}, {'bg-gray-300': isAnswered})}
+      className={cx(
+        'bg-gray-50 rounded-lg shadow-md p-6 my-3',
+        {
+          'bg-purple-100 border border-purple-500':
+            isHighlighted && !isAnswered,
+        },
+        { 'bg-gray-300': isAnswered }
+      )}
       // className={` ${answered} ${highlighted}`}
     >
       <p className='text-gray-600'>{content}</p>

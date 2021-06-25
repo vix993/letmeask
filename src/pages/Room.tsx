@@ -145,18 +145,19 @@ export const Room = () => {
               >
                 {!question.isAnswered && (
                   <button
-                  className='border-0 bg-transparent flex items-end gap-2 text-gray-400 transition hover:opacity-75'
-                  type='button'
-                  aria-label='show that I like it'
-                  onClick={() =>
-                    handleLikeQuestion(question.id, question.likeId)
-                  }
-                >
-                  {question.likeCount > 0 && <span>{question.likeCount}</span>}
-                  <LikeIcon styling={`${liked} stroke-current`} />
-                </button>
+                    className='border-0 bg-transparent flex items-end gap-2 text-gray-400 transition hover:opacity-75'
+                    type='button'
+                    aria-label='show that I like it'
+                    onClick={() =>
+                      handleLikeQuestion(question.id, question.likeId)
+                    }
+                  >
+                    {question.likeCount > 0 && (
+                      <span>{question.likeCount}</span>
+                    )}
+                    <LikeIcon styling={`${liked} stroke-current`} />
+                  </button>
                 )}
-                
               </Question>
             );
           })}
