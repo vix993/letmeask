@@ -32,7 +32,7 @@ Typescript, Firebase, Tailwind Css, and more.
 
 ###### Log In or Join Room
 
-Log in with google to create a room. Or join an existing Q&A using the room ID.
+Log in with google to redirect to the create a room page. Or join an existing Q&A using the room ID.
 
 <img src="./presentation/screenshotLanding.png" alt="screenshot of landing page UI"/>
 
