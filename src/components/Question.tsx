@@ -19,8 +19,6 @@ export const Question = ({
   isHighlighted = false,
   children,
 }: QuestionProps) => {
-  // const highlighted = isHighlighted ? '' : '';
-  // const answered = isAnswered ? '' : '';
   return (
     <section
       className={cx(
@@ -31,7 +29,6 @@ export const Question = ({
         },
         { 'bg-gray-300': isAnswered }
       )}
-      // className={` ${answered} ${highlighted}`}
     >
       <p className='text-gray-600'>{content}</p>
       <footer className='flex justify-between items-center mt-6'>
